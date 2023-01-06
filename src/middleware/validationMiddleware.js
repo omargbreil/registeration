@@ -21,10 +21,10 @@ export const validation = (Schema)=>
 
             if (validationError.length) 
             {
-                res.status(400).json({message:validationError});    
+                return res.status(400).json({message:validationError});    
             }else
             {
-                next()
+                return next()
             }
     }
 }

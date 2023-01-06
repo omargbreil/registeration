@@ -7,6 +7,7 @@ import express from "express";
 import cors from "cors";
 import { userRouter } from "./src/modules/user/user.router.js";
 import { connection } from "./DB/connection.js";
+import { globalError } from "./service/asynchandler.js";
 
 
 const app = express();
@@ -22,7 +23,9 @@ app.get("*" , (req,res)=>res.status(404).json({message:"invalid api", status:404
 app.get("/" , (req,res)=>
 {
     res.send("<h1>home page</h1>")
-})
+});
+app.use(globalError)
+
 
 
 

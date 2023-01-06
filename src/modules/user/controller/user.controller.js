@@ -2,12 +2,11 @@ import { userModel } from "../../../../DB/models/user/user.model.js";
 import  bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {sendEmail} from "../../../../service/sendemail.js"
+import { asyncHandler } from "../../../../service/asynchandler.js";
 
-export const signUp =async(req,res)=>
+export const signUp =asyncHandler(async(req,res,next)=>
 {
   
-    try 
-    {
         let{first_name,last_name , email , password , age} = req.body;
 
         const user = await userModel.findOne({email});
@@ -33,23 +32,18 @@ export const signUp =async(req,res)=>
                 res.status(201).json({message:"done" , savedUser});
             }else
             {
-                res.status(404).json({message:"invalid email"});
+                 return next(new Error("invalid email" , {cause:404}));
             
             }
         }else
         {
-            res.status(409).json({message:"email already register" , status:409});
-        }
+            return next(new Error("email already register" ,{cause:409 }));
+        }    
         
     
         
-    } catch (error) 
-    {
-        res.json({message:error})    
-    }
-
-       
-}
+    
+})
 
 
         
@@ -58,16 +52,15 @@ export const signUp =async(req,res)=>
 
 
 
-export const confirmEmail =async(req,res)=>
+export const confirmEmail =asyncHandler(async(req,res,next)=>
 {
-    try 
-    {
+    
         let {token} = req.params;
 
         let decoded = jwt.verify(token , process.env.signatureToken);
         if (!decoded) 
         {
-            res.status(400).json({message:"invalid token"});
+            return next( new Error("invalid token" , {cause:498}));
         }else
         {
             let update = await userModel.findByIdAndUpdate(decoded.id,
@@ -77,31 +70,25 @@ export const confirmEmail =async(req,res)=>
     
                 if (update) 
                 {
-                    res.redirect('https://omargbreil.github.io/noxe/login');
+                    res.redirect('https://omargbreil.github.io/noxe/');
                 }else
                 {
-                    res.status(400).json({message:"error"});
-    
+                      
+                    return next(new Error("not updated",{cause:424}))
                 
                 }
         }
 
-    } catch (error) 
-    {
-        res.status(404).json({message:error})    
-    }
-}
+})
  
   
    
  
 
 
-export const signIn =async(req,res)=>
+export const signIn =asyncHandler(async(req,res,next)=>
 {   
-    
-    try 
-    {
+
         let {email , password } = req.body;
 
         let user = await userModel.findOne({email});
@@ -119,26 +106,19 @@ export const signIn =async(req,res)=>
 
                 }else
                 {
-                    res.status(400).json({message:"you have to confirm your email"});
+                    return next(new Error("you have yo confirm" ,{cause:410}))
 
                 }
 
                 
             }else
             {
-                res.status(403).json({message:"incorrect password"}); 
+                return next(new Error("incorrect password" , {cause:403}))
             }   
         }else
         {
-            res.status(404).json({message:"you have to register"});
+             return next(new Error("you have to register first" ,{cause:409}))
             
         }
-        
-    
-        
-    } catch (error) 
-    {
-        res.status({message:error})    
-    }
-        
-};
+ 
+});
