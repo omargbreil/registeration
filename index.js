@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(`${process.env.baseUrl}/user` , userRouter);
+app.use(`/user` , userRouter);
 connection();
 
 let port = process.env.port
