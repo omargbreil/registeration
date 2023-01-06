@@ -16,7 +16,7 @@ export const signUp =asyncHandler(async(req,res,next)=>
             let hashed = bcrypt.hashSync(password , parseInt(process.env.saltRound));
             let addUser = new userModel({first_name,last_name , email , password:hashed , age});
 
-            let token = jwt.sign({id:addUser._id , email:email} , `${process.env.signatureToken}` , {expiresIn:"1hr"});
+            let token = jwt.sign({id:addUser._id , email:email} , `rego` , {expiresIn:"1hr"});
             let link =`${req.protocol}://${req.headers.host}/user/confirmEmail/${token}`;
 
             let message = `verify your email <a href="${link}">click here</a>`;
@@ -57,7 +57,7 @@ export const confirmEmail =asyncHandler(async(req,res,next)=>
     
         let {token} = req.params;
 
-        let decoded = jwt.verify(token , `${process.env.signatureToken}`);
+        let decoded = jwt.verify(token , `rego`);
         if (!decoded) 
         {
             return next( new Error("invalid token" , {cause:498}));
