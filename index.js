@@ -19,12 +19,13 @@ connection();
 
 let port = process.env.port
 app.listen(port,()=>console.log(`server running on ${port}`));
-app.get("*" , (req,res)=>res.status(404).json({message:"invalid api", status:404}));
 app.get("/" , (req,res)=>
 {
     res.send("<h1>home page</h1>")
 });
 app.use(globalError)
+
+app.get("*" , (req,res)=>res.status(404).json({message:"invalid api", status:404}));
 
 
 
