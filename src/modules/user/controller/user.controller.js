@@ -17,7 +17,7 @@ export const signUp =asyncHandler(async(req,res,next)=>
             let addUser = new userModel({first_name,last_name , email , password:hashed , age});
 
             let token = jwt.sign({id:addUser._id , email:email} , process.env.signatureToken , {expiresIn:"1hr"});
-            let link =`${req.protocol}://${req.headers.host}${process.env.baseUrl}/user/confirmEmail/${token}`;
+            let link =`${req.protocol}://${req.headers.host}/user/confirmEmail/${token}`;
 
             let message = `verify your email <a href="${link}">click here</a>`;
 
