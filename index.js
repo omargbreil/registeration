@@ -25,7 +25,7 @@ app.get("/" , (req,res)=>
 });
 app.use(globalError)
 
-app.get("*" , (req,res)=>res.status(404).json({message:"invalid api", status:404}));
+app.get("*",(req,res)=>res.status(404).json({message:"invalid api", status:404}));
 
 
 
