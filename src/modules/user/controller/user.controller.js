@@ -102,23 +102,22 @@ export const signIn =asyncHandler(async(req,res,next)=>
                 {
                     let token = jwt.sign({id:user._id , isLoggedIn:true , email:email} , process.env.emailToken , {expiresIn:"1hr"});
                     res.status(200).json({message:"done" , token});
-                    res.redirect('https://omargbreil.github.io/noxe/');
 
                 }else
                 {
                     return next(new Error("you have yo confirm" ,{cause:410}))
-
                 }
 
-                
             }else
             {
                 return next(new Error("incorrect password" , {cause:403}))
             }   
+
         }else
         {
-             return next(new Error("you have to register first" ,{cause:409}))
-            
+            return next(new Error("you have to register first" ,{cause:409}))
         }
- 
 });
+            
+            
+ 
