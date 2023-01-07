@@ -1,6 +1,8 @@
-import path from "path";
-import { fileURLToPath } from "url";
+
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import path from "path";
+
 let direname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({path:path.join(direname,"./config/.env")});
 import express from "express";
