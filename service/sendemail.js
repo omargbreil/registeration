@@ -17,7 +17,7 @@ export const sendEmail = async(dest , message) =>
 
     let info = await transporter.sendMail(
         {
-            from:process.env.senderEmail,
+            from:`${process.env.senderEmail}`,
             to:dest,
             html:message,
             text:"have a good day",
