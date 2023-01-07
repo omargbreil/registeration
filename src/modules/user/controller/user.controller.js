@@ -105,7 +105,7 @@ export const signIn =asyncHandler(async(req,res,next)=>
 
                 }else
                 {
-                    return next(new Error("you have yo confirm" ,{cause:410}))
+                    return next(new Error("you have To confirm your email ... check your mail please " ,{cause:410}))
                 }
 
             }else
