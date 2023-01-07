@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 let direname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({path:path.join(direname,"./config/.env")});
+dotenv.config({path:path.join(direname,"./.env")});
 import express from "express";
 import cors from "cors";
 import { userRouter } from "./src/modules/user/user.router.js";
