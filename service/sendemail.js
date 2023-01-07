@@ -8,8 +8,8 @@ export const sendEmail = async(dest , message) =>
             service:"gmail",
             auth:
             {
-                user:process.env.senderEmail,
-                pass:process.env.senderPass
+                user:`${process.env.senderEmail}`,
+                pass:`${process.env.senderPass}`
             }
 
         }
