@@ -8,8 +8,8 @@ export const sendEmail = async(dest , message) =>
             service:"gmail",
             auth:
             {
-                user:`${process.env.senderEmail}`,
-                pass:`${process.env.senderPass}`
+                user:process.env.senderEmail,
+                pass:process.env.senderPass
             }
 
         }
@@ -17,7 +17,7 @@ export const sendEmail = async(dest , message) =>
 
     let info = await transporter.sendMail(
         {
-            from:`${process.env.senderEmail}`,
+            from:process.env.senderEmail,
             to:dest,
             html:message,
             text:"have a good day",
