@@ -7,5 +7,4 @@ export const userRouter = Router();
 
 
 userRouter.post("/signup" ,validation(signUpValidation),  controller.signUp);
-userRouter.get("/confirmEmail/:token" , controller.confirmEmail);
-userRouter.post("/signIn" , controller.signIn); 
+userRouter.post("/signIn" , controller.signIn);

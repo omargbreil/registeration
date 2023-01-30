@@ -33,11 +33,6 @@ const userSchema = new Schema(
 
         },
      
-        is_confirmed:
-        {
-            type:Boolean,
-            default:false
-        }
     },{timestamps:true});
 
     export const userModel = model('user' ,userSchema);

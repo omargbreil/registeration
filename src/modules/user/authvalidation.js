@@ -36,4 +36,28 @@ export const signUpValidation =
         }
 
     )
+}
+
+
+export const newPassword =
+{
+    body: joi.object().required().keys(
+        {
+            email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+            code:joi.string(),
+            
+            new_password: joi.string().min(6).max(20).pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required().messages(
+                {
+                    "string.pattern.base":"not matched pattern",
+                    "string.min":"not matched pattern"
+                }
+            ),
+            confirm_password:joi.valid(joi.ref("new_password")).required()
+
+
+
+        }
+
+    )
 } 
+
